@@ -57,6 +57,7 @@ class Builder
         ), 1000
 
       build.on "data", (data)   ->
+        console.log "[#{builder.id}] #{data.toString().replace(/\n$/, '')}"
         exit_header = "ANVIL!EXITCODE:"
         if (pos = data.toString().indexOf(exit_header)) > -1
           res.write data.slice(0, pos)
