@@ -26,7 +26,12 @@ app = express.createServer(
   express.bodyParser())
 
 if process.env.BASIC_USER and process.env.BASIC_PASS
-  app.use(express.basicAuth(process.env.BASIC_USER, process.env.BASIC_PASS))
+  app.use (req, res, next) ->
+    if req.url == "/" or req.url == "/heartbeat"
+      next()
+    else
+      auth = express.basicAuth(process.env.BASIC_USER, process.env.BASIC_PASS)
+      auth(req, res, next)
 
 app.get "/", (req, res) ->
   res.send "ok"
