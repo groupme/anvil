@@ -62,6 +62,9 @@ class Storage
   create_cache: ->
     id = uuid.v4()
     url = "#{process.env.ANVIL_HOST}/cache/#{id}.tgz"
+    if process.env.BASIC_USER and process.env.BASIC_PASS
+      url = url.replace(/(https?:\/\/)/, "$1#{process.env.BASIC_USER}:#{process.env.BASIC_PASS}@")
+    url
 
 module.exports.init = () ->
   new Storage()

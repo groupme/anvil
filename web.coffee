@@ -25,6 +25,9 @@ app = express.createServer(
     format: "subject=\"http\" method=\":method\" url=\":url\" status=\":status\" elapsed=\":response-time\" from=\":remote-addr\" agent=\":user-agent\""
   express.bodyParser())
 
+if process.env.BASIC_USER and process.env.BASIC_PASS
+  app.use(express.basicAuth(process.env.BASIC_USER, process.env.BASIC_PASS))
+
 app.get "/", (req, res) ->
   res.send "ok"
 
