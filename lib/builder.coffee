@@ -26,6 +26,7 @@ class Builder
           SLUG_PUT_URL:  slug_put_url
           SLUG_TYPE:     ext
           SOURCE_URL:    source
+          TMPDIR:        process.env.TMPDIR
         env[key] = val for key, val of JSON.parse(options.env || "{}")
         builder  = @spawner.spawn("bin/compile-wrapper $SOURCE_URL", env:env)
         cb builder, this
