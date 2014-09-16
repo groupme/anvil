@@ -94,7 +94,7 @@ echo "done"
 
 # get buildpack name
 echo -n "Detecting buildpack... "
-buildpack_name=$($buildpack/bin/detect "$compile_dir") \
+buildpack_name=$($buildpack/bin/detect "$compile_dir" 2>/dev/null) \
   && echo "done, ${buildpack_name}" \
   || error "failed"
 
